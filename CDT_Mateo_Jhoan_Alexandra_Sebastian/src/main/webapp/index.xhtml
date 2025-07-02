@@ -4,7 +4,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
 -->
 <!DOCTYPE html>
-<html xmlns=xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
@@ -14,9 +14,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body>
-        <div class="d-flex justify-content-between"
-            <h:commandButton value="Datos" action="#{productoBancarioBean}" styleClass="btn btn-primary" />
-            <h:commandButton value="Mostrar" styleClass="btn btn-secondary" />
-        </div>
+        <h:form styleClass="container mt-4">
+            <div class="d-flex justify-content-between">
+                <h:commandButton value="Datos" action="#{productoBancarioBean.openFormulario()}" styleClass="btn btn-primary" />
+                <h:commandButton value="Mostrar" action="#{productoBancarioBean.ver()}" styleClass="btn btn-secondary" />
+            </div>
+        </h:form>
     </body>
 </html>
