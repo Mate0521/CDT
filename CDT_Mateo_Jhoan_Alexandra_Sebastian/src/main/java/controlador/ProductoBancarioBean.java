@@ -12,7 +12,7 @@ import modelo.User;
 
 /**
  *
- * @author jhoan
+ * @author mateo
  */
 @Named(value = "productoBancarioBean")
 @SessionScoped
@@ -27,10 +27,10 @@ public class ProductoBancarioBean implements Serializable{
     public ProductoBancarioBean() {
     }
     
-    public String OpenForm(){
+    public String openFormulario(){
         return "formUsuarios?faces-redirect=true";
     }
-    public String watch(){
+    public String ver(){
         return "Mostrar?faces-redirect=true";
     }
     
