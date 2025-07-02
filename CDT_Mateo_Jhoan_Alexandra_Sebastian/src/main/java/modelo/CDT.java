@@ -4,14 +4,34 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author jhoan
  */
-public class CDT {
+@Entity
+@Table(name = "cdt")
+public class CDT implements Serializable {
+    
+    @Id
+    @Column(name = "numerocuenta") 
+    private long numeroCuenta; //cedula+frcha+numero aleatorio 
+    
+    @Column(name = "invercion") 
     private double inversion;
+    
+    @Column(name = "interes")
     private double interes;
+    
+    @Column(name = "plazo")
     private double plazo;
+    
+    
     private double ganancia;
     private double valorFuturo;
     private double retencion;
@@ -20,7 +40,8 @@ public class CDT {
     public CDT() {
     }
 
-    public CDT(double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
+    public CDT(long numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
+        this.numeroCuenta=numeroC;
         this.inversion = inversion;
         this.interes = interes;
         this.plazo = plazo;
@@ -76,6 +97,15 @@ public class CDT {
     public void setRetencion(double retencion) {
         this.retencion = retencion;
     }
+
+    public long getNumeroCuenta() {
+        return numeroCuenta;
+    }
+
+    public void setNumeroCuenta(long NumeroCuenta) {
+        this.numeroCuenta = NumeroCuenta;
+    }
+    
     
     
     
