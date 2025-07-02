@@ -4,44 +4,61 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author jhoan
  */
-public class User {
-    private String Nombre;
-    private String Cedula;
+@Entity
+@Table(name = "usuario")
+public class User implements Serializable {
+    
+    @Id
+    @Column(name = "cedula")
+    private String cedula;
+    
+    @Column(name = "nombre") 
+    private String nombre;
+    
+    @Column(name = "fecha_nac")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha_nac;
+    
+    @Column(name = "nacionacionalidad")
     private String nacionalidad;
-    private long NumeroCuenta; //cedula+frcha+numero aleatorio 
+   
 
     public User() {
     }
 
-    public User(String Nombre, String Cedula, Date fecha_nac, String nacionalidad, long NumeroCuenta) {
-        this.Nombre = Nombre;
-        this.Cedula = Cedula;
+    public User(String Nombre, String Cedula, Date fecha_nac, String nacionalidad) {
+        this.nombre = Nombre;
+        this.cedula = Cedula;
         this.fecha_nac = fecha_nac;
         this.nacionalidad = nacionalidad;
-        this.NumeroCuenta = NumeroCuenta;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        this.nombre = Nombre;
     }
 
     public String getCedula() {
-        return Cedula;
+        return cedula;
     }
 
     public void setCedula(String Cedula) {
-        this.Cedula = Cedula;
+        this.cedula = Cedula;
     }
 
     public Date getFecha_nac() {
@@ -58,15 +75,5 @@ public class User {
 
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
-    }
-
-    public long getNumeroCuenta() {
-        return NumeroCuenta;
-    }
-
-    public void setNumeroCuenta(long NumeroCuenta) {
-        this.NumeroCuenta = NumeroCuenta;
-    }
-    
-    
+    }  
 }
