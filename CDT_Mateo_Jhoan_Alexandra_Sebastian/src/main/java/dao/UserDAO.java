@@ -15,9 +15,9 @@ import modelo.User;
  * @author MATEO CARVAJAL
  */
 public class UserDAO {
-     // Método para guardar un usuario en la base de datos
+    // Método para guardar un usuario en la base de datos
     public void guardarUser(User user) {
-        String sql = "INSERT INTO user (cedula, nombre, fecha_nac, nacionalidad) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (cedula, nombre, fecha_nac, nacionalidad, numerocuenta) VALUES (?, ?, ?, ?, ?)";
         
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -26,7 +26,8 @@ public class UserDAO {
             stmt.setString(2, user.getNombre());
             stmt.setDate(3, new java.sql.Date(user.getFecha_nac().getTime()));
             stmt.setString(4, user.getNacionalidad());
-            
+            stmt.setInt(5, user.getNumerocuenta()); // nuevo campo
+
             stmt.executeUpdate();
             
         } catch (Exception e) {
@@ -38,7 +39,7 @@ public class UserDAO {
     // Método para obtener un usuario por cédula
     public User obtenerUserPorCedula(String cedula) {
         User user = null;
-        String sql = "SELECT * FROM user WHERE cedula = ?";
+        String sql = "SELECT * FROM usuario WHERE cedula = ?";
         
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -52,6 +53,7 @@ public class UserDAO {
                 user.setNombre(rs.getString("nombre"));
                 user.setFecha_nac(rs.getDate("fecha_nac"));
                 user.setNacionalidad(rs.getString("nacionalidad"));
+                user.setNumerocuenta(rs.getInt("numerocuenta")); // nuevo campo
             }
             
         } catch (Exception e) {

@@ -16,21 +16,28 @@ import java.sql.Statement;
 
 public class Conexion {
 
-    // Configuración de la base de datos
     private static final String URL = "jdbc:mysql://localhost:3306/banco?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+   
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se encontró el driver JDBC de MySQL: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Error al conectar con la base de datos: " + e.getMessage());
+        }
+        return connection;
     }
-    
+
     public static ResultSet ejecutarConsulta(String sql) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-        return rs;
+        return stmt.executeQuery(sql);
     }
 
     public static void close(Connection conn) {
@@ -43,5 +50,5 @@ public class Conexion {
             }
         }
     }
-
 }
+

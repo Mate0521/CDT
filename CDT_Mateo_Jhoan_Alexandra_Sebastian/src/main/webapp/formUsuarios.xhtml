@@ -4,12 +4,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Registro Usuario y CDT</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h2>Registro de Usuario</h2>
+        <h:outputLabel value="Cédula:" />
+        <h:inputText value="#{productoBancarioBean.usuario.cedula}" /><br/>
+
+        <h:outputLabel value="Nombre:" />
+        <h:inputText value="#{productoBancarioBean.usuario.nombre}" /><br/>
+
+        <h:outputLabel value="Fecha de nacimiento:" />
+        <h:inputText value="#{productoBancarioBean.usuario.fecha_nac}">
+            <f:convertDateTime pattern="yyyy-MM-dd" />
+        </h:inputText><br/>
+
+        <h:outputLabel value="Nacionalidad:" />
+        <h:inputText value="#{productoBancarioBean.usuario.nacionalidad}" /><br/>
+
+        <h2>CDT</h2>
+        <h:outputLabel value="Número de cuenta:" />
+        <h:inputText value="#{productoBancarioBean.cdt.numeroCuenta}" /><br/>
+
+        <h:outputLabel value="Inversión:" />
+        <h:inputText value="#{productoBancarioBean.cdt.inversion}" /><br/>
+
+        <h:outputLabel value="Interés:" />
+        <h:inputText value="#{productoBancarioBean.cdt.interes}" /><br/>
+
+        <h:outputLabel value="Plazo (días):" />
+        <h:inputText value="#{productoBancarioBean.cdt.plazo}" /><br/>
+
+        <h:commandButton value="Guardar" action="#{productoBancarioBean.guardar}" />
+
+        <h:messages />
+    </h:form>
+</h:body>
 </html>
+

@@ -11,21 +11,21 @@ import java.util.Date;
  */
 
 public class User{
-    
-
     private String cedula; 
     private String nombre;
     private Date fecha_nac;
+    private int numerocuenta;
     private String nacionalidad;
    
 
     public User() {
     }
 
-    public User(String Nombre, String Cedula, Date fecha_nac, String nacionalidad) {
+    public User(String Nombre, String Cedula, Date fecha_nac, String nacionalidad, int numerocuenta) {
         this.nombre = Nombre;
         this.cedula = Cedula;
         this.fecha_nac = fecha_nac;
+        this.numerocuenta = numerocuenta;
         this.nacionalidad = nacionalidad;
     }
 
@@ -59,5 +59,14 @@ public class User{
 
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
-    }  
+    } 
+
+    public int getNumerocuenta() {
+        return numerocuenta;
+    }
+
+    public void setNumerocuenta(int numerocuenta) {
+        this.numerocuenta = numerocuenta;
+    }
+    
 }

@@ -17,15 +17,19 @@ import modelo.CDT;
 public class CDTDAO {
 
     public boolean guardarCDT(CDT cdt) {
-        String sql = "INSERT INTO cdt (numerocuenta, invercion, interes, plazo, ganancia, valorFuturo, retencion) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO cdt (numerocuenta, inversion, interes, plazo) VALUES (?, ?, ?, ?)";
+
 
         try (Connection conn = conexion.Conexion.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setLong(1, cdt.getNumeroCuenta());
+            ps.setInt(1, cdt.getNumeroCuenta());
             ps.setDouble(2, cdt.getInversion());
             ps.setDouble(3, cdt.getInteres());
             ps.setDouble(4, cdt.getPlazo());
+            //ps.setDouble(5, cdt.getGanancia());       // calculado
+            //ps.setDouble(6, cdt.getValorFuturo());    // calculado
+            //ps.setDouble(7, cdt.getRetencion());      // calculado
 
             int filasAfectadas = ps.executeUpdate();
             return filasAfectadas > 0;
@@ -36,11 +40,8 @@ public class CDTDAO {
         }
     }
 
-
     public CDT obtenerCDTPorNumeroCuenta(long numeroCuenta) {
-        String sql = "SELECT numerocuenta, invesion, interes, plazo "
-                   + "FROM cdt "
-                   + "WHERE numerocuenta = ?";
+        String sql = "SELECT numerocuenta, inversion, interes, plazo FROM cdt WHERE numerocuenta = ?";
 
         try (Connection conn = conexion.Conexion.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -51,7 +52,7 @@ public class CDTDAO {
             if (rs.next()) {
                 CDT cdt = new CDT();
                 cdt.setNumeroCuenta(rs.getInt("numerocuenta"));
-                cdt.setInversion(rs.getDouble("inversion"));
+                cdt.setInversion(rs.getDouble("inversion")); // corregido
                 cdt.setInteres(rs.getDouble("interes"));
                 cdt.setPlazo(rs.getDouble("plazo"));
 
@@ -59,7 +60,7 @@ public class CDTDAO {
                 return cdt;
             } else {
                 rs.close();
-                return null; // no encontradoo
+                return null;
             }
 
         } catch (Exception e) {
@@ -68,4 +69,3 @@ public class CDTDAO {
         }
     }
 }
-
