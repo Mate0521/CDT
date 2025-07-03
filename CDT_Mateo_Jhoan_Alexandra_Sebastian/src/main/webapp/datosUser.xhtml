@@ -9,34 +9,79 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <title>Datos del CDT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </h:head>
 <h:body>
-    <h:form>
-        <h:panelGrid columns="2">
-            <h:outputText value="#{productoBancarioBean.num}" />
-            
-            <h:outputText value="Número de cuenta:" />
-            <h:outputText value="#{productoBancarioBean.cdt.numeroCuenta}" />
+    <div class="container mt-4">
+        <h:form>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Información del CDT</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Número de cuenta:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.numeroCuenta}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Inversión:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.inversion}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Interés:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.interes}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Plazo:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.plazo}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Ganancia:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.ganancia}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Valor Futuro:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.valorFuturo}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Retención:</div>
+                        <div class="col-md-8">#{productoBancarioBean.cdt.retencion}</div>
+                    </div>
+                    
+                </div>
+            </div>
 
-            <h:outputText value="Inversión:" />
-            <h:outputText value="#{productoBancarioBean.cdt.inversion}" />
+            <div class="card">
+                <div class="card-header">
+                    <h5>Información del Usuario</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Nombre:</div>
+                        <div class="col-md-8">#{productoBancarioBean.usuario.nombre}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Número de identificación:</div>
+                        <div class="col-md-8">#{productoBancarioBean.usuario.cedula}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Nacionalidad:</div>
+                        <div class="col-md-8">#{productoBancarioBean.usuario.nacionalidad}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Fecha de nacimiento:</div>
+                        <div class="col-md-8">
+                            #{productoBancarioBean.usuario.fecha_nac} 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </div>
 
-            <h:outputText value="Interés:" />
-            <h:outputText value="#{productoBancarioBean.cdt.interes}" />
-
-            <h:outputText value="Plazo:" />
-            <h:outputText value="#{productoBancarioBean.cdt.plazo}" />
-
-            <h:outputText value="Ganancia:" />
-            <h:outputText value="#{productoBancarioBean.cdt.ganancia}" />
-
-            <h:outputText value="Valor Futuro:" />
-            <h:outputText value="#{productoBancarioBean.cdt.valorFuturo}" />
-
-            <h:outputText value="Retención:" />
-            <h:outputText value="#{productoBancarioBean.cdt.retencion}" />
-        </h:panelGrid>
-    </h:form>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </h:body>
 </html>
 

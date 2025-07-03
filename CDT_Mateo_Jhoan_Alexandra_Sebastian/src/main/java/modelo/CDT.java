@@ -10,7 +10,7 @@ package modelo;
 
 public class CDT {
     
-    private int numeroCuenta; //cedula+frcha+numero aleatorio 
+    private String numeroCuenta; //cedula+frcha+numero aleatorio 
     private double inversion;
     private double interes;
     private double plazo;
@@ -22,7 +22,7 @@ public class CDT {
     public CDT() {
     }
 
-    public CDT(int numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
+    public CDT(String numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
         this.numeroCuenta=numeroC;
         this.inversion = inversion;
         this.interes = interes;
@@ -83,11 +83,11 @@ public class CDT {
         this.retencion = retencion;
     }
 
-    public int getNumeroCuenta() {
+    public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(int NumeroCuenta) {
+    public void setNumeroCuenta(String NumeroCuenta) {
         this.numeroCuenta = NumeroCuenta;
     }
     

@@ -22,8 +22,16 @@ public class Conexion {
     private static final String PASSWORD = "";
 
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Asegúrate de que esta línea esté presente
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
+            // Esto te ayudará a ver si el driver no se encuentra
+            
+        }
+        return connection;
     }
     
     public static ResultSet ejecutarConsulta(String sql) throws Exception {

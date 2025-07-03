@@ -38,7 +38,7 @@ public class UserDAO {
     // Método para obtener un usuario por cédula
     public User obtenerUserPorCedula(String cedula) {
         User user = null;
-        String sql = "SELECT * FROM user WHERE cedula = ?";
+        String sql = "SELECT cedula, nombre, fecha_nac, nacionalidad FROM usuario WHERE cedula = ?";
         
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -60,5 +60,26 @@ public class UserDAO {
         }
         
         return user;
+    }
+    
+    public boolean autenticacion(String numCDT,String numUser){
+        String sql = "SELECT numerocuenta FROM usuario WHERE numerocuenta = ?";
+        
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, numCDT);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                numUser=rs.getString("numerocuenta");
+                return numUser.equals(numCDT);
+
+            }
+            
+        } catch (Exception e) {
+            System.out.println("error no son iguales");
+        }
+        return false;
     }
 }
