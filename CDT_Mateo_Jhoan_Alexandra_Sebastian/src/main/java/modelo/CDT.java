@@ -3,35 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
-
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
  *
  * @author jhoan
  */
-@Entity
-@Table(name = "cdt")
-public class CDT implements Serializable {
+
+public class CDT {
     
-    @Id
-    @Column(name = "numerocuenta") 
-    private long numeroCuenta; //cedula+frcha+numero aleatorio 
-    
-    @Column(name = "invercion") 
+    private String numeroCuenta; //cedula+frcha+numero aleatorio 
     private double inversion;
-    
-    @Column(name = "interes")
     private double interes;
-    
-    @Column(name = "plazo")
     private double plazo;
-    
-    
     private double ganancia;
     private double valorFuturo;
     private double retencion;
@@ -40,7 +22,7 @@ public class CDT implements Serializable {
     public CDT() {
     }
 
-    public CDT(long numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
+    public CDT(String numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
         this.numeroCuenta=numeroC;
         this.inversion = inversion;
         this.interes = interes;
@@ -75,7 +57,8 @@ public class CDT implements Serializable {
     }
 
     public double getGanancia() {
-        return ganancia;
+        this.ganancia = inversion * (interes / 100) * (plazo / ANIO);
+        return this.ganancia;
     }
 
     public void setGanancia(double ganancia) {
@@ -83,7 +66,8 @@ public class CDT implements Serializable {
     }
 
     public double getValorFuturo() {
-        return valorFuturo;
+        this.valorFuturo = inversion + getGanancia() - getRetencion();
+        return this.valorFuturo;
     }
 
     public void setValorFuturo(double valorFuturo) {
@@ -91,22 +75,20 @@ public class CDT implements Serializable {
     }
 
     public double getRetencion() {
-        return retencion;
+        this.retencion = getGanancia() * 0.046; //  6% de retención
+        return this.retencion;
     }
 
     public void setRetencion(double retencion) {
         this.retencion = retencion;
     }
 
-    public long getNumeroCuenta() {
+    public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(long NumeroCuenta) {
+    public void setNumeroCuenta(String NumeroCuenta) {
         this.numeroCuenta = NumeroCuenta;
     }
-    
-    
-    
     
 }
