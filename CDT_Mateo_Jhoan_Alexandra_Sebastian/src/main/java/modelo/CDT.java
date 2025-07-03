@@ -14,24 +14,13 @@ import javax.persistence.Table;
  *
  * @author jhoan
  */
-@Entity
-@Table(name = "cdt")
-public class CDT implements Serializable {
+
+public class CDT {
     
-    @Id
-    @Column(name = "numerocuenta") 
     private long numeroCuenta; //cedula+frcha+numero aleatorio 
-    
-    @Column(name = "invercion") 
     private double inversion;
-    
-    @Column(name = "interes")
     private double interes;
-    
-    @Column(name = "plazo")
     private double plazo;
-    
-    
     private double ganancia;
     private double valorFuturo;
     private double retencion;
@@ -75,7 +64,8 @@ public class CDT implements Serializable {
     }
 
     public double getGanancia() {
-        return ganancia;
+        this.ganancia = inversion * (interes / 100) * (plazo / ANIO);
+        return this.ganancia;
     }
 
     public void setGanancia(double ganancia) {
@@ -83,7 +73,8 @@ public class CDT implements Serializable {
     }
 
     public double getValorFuturo() {
-        return valorFuturo;
+        this.valorFuturo = inversion + getGanancia() - getRetencion();
+        return this.valorFuturo;
     }
 
     public void setValorFuturo(double valorFuturo) {
@@ -91,7 +82,8 @@ public class CDT implements Serializable {
     }
 
     public double getRetencion() {
-        return retencion;
+        this.retencion = getGanancia() * 0.046; //  6% de retención
+        return this.retencion;
     }
 
     public void setRetencion(double retencion) {
@@ -105,8 +97,5 @@ public class CDT implements Serializable {
     public void setNumeroCuenta(long NumeroCuenta) {
         this.numeroCuenta = NumeroCuenta;
     }
-    
-    
-    
     
 }

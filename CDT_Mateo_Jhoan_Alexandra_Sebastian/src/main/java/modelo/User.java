@@ -4,34 +4,18 @@
  */
 package modelo;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-
 /**
  *
  * @author jhoan
  */
-@Entity
-@Table(name = "usuario")
-public class User implements Serializable {
+
+public class User{
     
-    @Id
-    @Column(name = "cedula")
-    private String cedula;
-    
-    @Column(name = "nombre") 
+
+    private String cedula; 
     private String nombre;
-    
-    @Column(name = "fecha_nac")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha_nac;
-    
-    @Column(name = "nacionacionalidad")
     private String nacionalidad;
    
 
