@@ -38,7 +38,9 @@ public class CDTDAO {
 
 
     public CDT obtenerCDTPorNumeroCuenta(long numeroCuenta) {
-        String sql = "SELECT * FROM cdt WHERE numerocuenta = ?";
+        String sql = "SELECT numerocuenta, invesion, interes, plazo "
+                   + "FROM cdt "
+                   + "WHERE numerocuenta = ?";
 
         try (Connection conn = conexion.Conexion.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -48,8 +50,8 @@ public class CDTDAO {
 
             if (rs.next()) {
                 CDT cdt = new CDT();
-                cdt.setNumeroCuenta(rs.getLong("numerocuenta"));
-                cdt.setInversion(rs.getDouble("invercion"));
+                cdt.setNumeroCuenta(rs.getInt("numerocuenta"));
+                cdt.setInversion(rs.getDouble("inversion"));
                 cdt.setInteres(rs.getDouble("interes"));
                 cdt.setPlazo(rs.getDouble("plazo"));
 

@@ -3,13 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
-
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
  *
  * @author jhoan
@@ -17,7 +10,7 @@ import javax.persistence.Table;
 
 public class CDT {
     
-    private long numeroCuenta; //cedula+frcha+numero aleatorio 
+    private int numeroCuenta; //cedula+frcha+numero aleatorio 
     private double inversion;
     private double interes;
     private double plazo;
@@ -29,7 +22,7 @@ public class CDT {
     public CDT() {
     }
 
-    public CDT(long numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
+    public CDT(int numeroC, double inversion, double interes, double plazo, double ganancia, double valorFuturo, double  rete) {
         this.numeroCuenta=numeroC;
         this.inversion = inversion;
         this.interes = interes;
@@ -90,11 +83,11 @@ public class CDT {
         this.retencion = retencion;
     }
 
-    public long getNumeroCuenta() {
+    public int getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(long NumeroCuenta) {
+    public void setNumeroCuenta(int NumeroCuenta) {
         this.numeroCuenta = NumeroCuenta;
     }
     

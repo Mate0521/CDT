@@ -5,8 +5,9 @@
 package controlador;
 
 
-import conexion.Conexion;
 import dao.CDTDAO;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 import java.io.Serializable;
 import modelo.CDT;
 import modelo.User;
@@ -15,12 +16,14 @@ import modelo.User;
  *
  * @author mateo
  */
-
+@Named("productoBancarioBean")
+@SessionScoped
 public class ProductoBancarioBean implements Serializable{
     
     private CDT cdt=new CDT();
     private User usuario=new User();
     private final CDTDAO cdtDAO = new CDTDAO();
+    private int num;
 
     /**
      * Creates a new instance of ProductoBancarioBean
@@ -32,20 +35,11 @@ public class ProductoBancarioBean implements Serializable{
         return "formUsuarios?faces-redirect=true";
     }
     public String ver() {
-        
-        long numeroCuentaBuscar = cdt.getNumeroCuenta(); 
-        CDT cdtEncontrado = cdtDAO.obtenerCDTPorNumeroCuenta(numeroCuentaBuscar);
-
-        if (cdtEncontrado != null) {
-            this.cdt = cdtEncontrado;
-            System.out.println("CDT encontrado: " + cdt.getNumeroCuenta());
-        } else {
-            System.out.println("No se encontró un CDT con ese número de cuenta.");
-        }
-
-        return "";
+        CDT cdtEncontrado = cdtDAO.obtenerCDTPorNumeroCuenta(this.num);
+        this.cdt=cdtEncontrado;
+        return "datosUser.xhtml";
     }
-    
+
     //resto de formatos 
 
     public CDT getCdt() {
@@ -62,6 +56,14 @@ public class ProductoBancarioBean implements Serializable{
 
     public void setUsuario(User usuario) {
         this.usuario = usuario;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
     
 }
