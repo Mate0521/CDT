@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.Date;
+
 /**
  *
  * @author jhoan
@@ -59,6 +60,7 @@ public class User{
 
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
+<<<<<<< HEAD
     } 
 
     public int getNumerocuenta() {
@@ -67,6 +69,8 @@ public class User{
 
     public void setNumerocuenta(int numerocuenta) {
         this.numerocuenta = numerocuenta;
+=======
+>>>>>>> 5e9d4c4954b65cbca55b1bb251723cd83a747424
     }
     
 }

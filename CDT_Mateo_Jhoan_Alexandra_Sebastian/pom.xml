@@ -63,6 +63,12 @@
       <version>8.0.33</version>
       <scope>compile</scope>
     </dependency>
+    
+    <dependency>
+         <groupId>mysql</groupId>
+         <artifactId>mysql-connector-java</artifactId>
+         <version>8.0.30</version> 
+     </dependency>
 
     <!-- JUnit 5 para tests -->
     <dependency>
@@ -78,10 +84,19 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+<<<<<<< HEAD
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.30</version>
     </dependency>
+=======
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-api</artifactId>
+        <version>10.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+
+>>>>>>> 5e9d4c4954b65cbca55b1bb251723cd83a747424
   </dependencies>
 
   <build>

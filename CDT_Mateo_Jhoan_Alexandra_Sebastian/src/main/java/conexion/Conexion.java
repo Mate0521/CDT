@@ -20,6 +20,7 @@ public class Conexion {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
+<<<<<<< HEAD
    
     public static Connection getConnection() {
         Connection connection = null;
@@ -30,6 +31,17 @@ public class Conexion {
             System.err.println("No se encontró el driver JDBC de MySQL: " + e.getMessage());
         } catch (SQLException e) {
             System.err.println("Error al conectar con la base de datos: " + e.getMessage());
+=======
+
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Asegúrate de que esta línea esté presente
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
+            // Esto te ayudará a ver si el driver no se encuentra
+            
+>>>>>>> 5e9d4c4954b65cbca55b1bb251723cd83a747424
         }
         return connection;
     }
