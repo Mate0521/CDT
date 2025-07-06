@@ -17,7 +17,7 @@ import modelo.CDT;
 public class CDTDAO {
 
     public boolean guardarCDT(CDT cdt) {
-        String sql = "INSERT INTO cdt (numerocuenta, invercion, interes, plazo) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO cdt (numerocuenta, inversion, interes, plazo) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = conexion.Conexion.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -54,13 +54,6 @@ public class CDTDAO {
                 cdt.setInversion(rs.getDouble("inversion"));
                 cdt.setInteres(rs.getDouble("interes"));
                 cdt.setPlazo(rs.getDouble("plazo"));
-                
-                System.out.println("CDT encontrado: "
-                + cdt.getNumeroCuenta() + " "
-                + cdt.getInversion() + " "
-                + cdt.getInteres() + " "
-                + cdt.getPlazo());
-
 
                 rs.close();
                 return cdt;
@@ -74,5 +67,6 @@ public class CDTDAO {
             return null;
         }
     }
+    
 }
 

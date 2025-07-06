@@ -9,6 +9,8 @@ import conexion.Conexion;
 import dao.CDTDAO;
 import dao.UserDAO;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -55,9 +57,31 @@ public class ProductoBancarioBean implements Serializable{
         
     }
     
+    public String guardar() {
+
+        usuario.setCedula(usuario.getCedula().trim());
+        usuario.setNombre(usuario.getNombre().trim());
+        usuario.setNacionalidad(usuario.getNacionalidad().trim());
+        cdt.setNumeroCuenta(usuario.getCedula().trim() + "00001");
+        
+        try {
+            
+            cdtDAO.guardarCDT(cdt);
+            // Luego asociar la cuenta al usuario y guardar el usuario
+            userDAO.guardarUser(usuario,cdt.getNumeroCuenta());
+            this.usuario = new User();
+            this.cdt = new CDT();
+        } catch (Exception e) {
+            System.out.println("Error al guardar:" + e.getMessage());
+            
+        }
+
+        return null;
+    }
+    
     public void extraerObCDT(){
         try (Connection conn = Conexion.getConnection()) {
-            System.out.println("<div>conexion exitosa</div>");
+            System.out.println("conexion exitosa");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,7 +95,7 @@ public class ProductoBancarioBean implements Serializable{
     }
     public void extraerObUser(){
         try (Connection conn = Conexion.getConnection()) {
-            System.out.println("<div>conexión exitosa</div>");
+            System.out.println("conexion exitosa");
         } catch (SQLException e) {
             e.printStackTrace();
         }

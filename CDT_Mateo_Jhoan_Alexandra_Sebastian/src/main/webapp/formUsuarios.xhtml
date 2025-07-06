@@ -4,12 +4,76 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Registro Usuario y CDT</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</h:head>
+<h:body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Registro de Usuario y CDT</h4>
+            </div>
+            <div class="card-body">
+                <h:form>
+                    <!-- Registro de Usuario -->
+                    <h5 class="mb-3">Registro de Usuario</h5>
+
+                    <div class="mb-3">
+                        <h:outputLabel for="cedula" value="Cédula:" styleClass="form-label" />
+                        <h:inputText id="cedula" value="#{productoBancarioBean.usuario.cedula}" styleClass="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="form-label" />
+                        <h:inputText id="nombre" value="#{productoBancarioBean.usuario.nombre}" styleClass="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <h:outputLabel for="fecha_nac" value="Fecha de nacimiento:" styleClass="form-label" />
+                        <h:inputText id="fecha_nac" value="#{productoBancarioBean.usuario.fecha_nac}" styleClass="form-control">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="mb-4">
+                        <h:outputLabel for="nacionalidad" value="Nacionalidad:" styleClass="form-label" />
+                        <h:inputText id="nacionalidad" value="#{productoBancarioBean.usuario.nacionalidad}" styleClass="form-control" />
+                    </div>
+
+                    <!-- CDT -->
+                    <h5 class="mb-3">CDT</h5>
+
+                    <div class="mb-3">
+                        <h:outputLabel for="inversion" value="Inversión:" styleClass="form-label" />
+                        <h:inputText id="inversion" value="#{productoBancarioBean.cdt.inversion}" styleClass="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <h:outputLabel for="interes" value="Interés:" styleClass="form-label" />
+                        <h:inputText id="interes" value="#{productoBancarioBean.cdt.interes}" styleClass="form-control" />
+                    </div>
+
+                    <div class="mb-4">
+                        <h:outputLabel for="plazo" value="Plazo (días):" styleClass="form-label" />
+                        <h:inputText id="plazo" value="#{productoBancarioBean.cdt.plazo}" styleClass="form-control" />
+                    </div>
+
+                    <h:commandButton value="Guardar" action="#{productoBancarioBean.guardar}" styleClass="btn btn-success" />
+
+                    <div class="mt-3">
+                        <h:messages styleClass="text-danger" />
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</h:body>
 </html>

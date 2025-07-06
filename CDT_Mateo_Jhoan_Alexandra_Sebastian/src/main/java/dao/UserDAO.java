@@ -16,8 +16,8 @@ import modelo.User;
  */
 public class UserDAO {
      // Método para guardar un usuario en la base de datos
-    public void guardarUser(User user) {
-        String sql = "INSERT INTO user (cedula, nombre, fecha_nac, nacionalidad) VALUES (?, ?, ?, ?)";
+    public void guardarUser(User user, String num) {
+        String sql = "INSERT INTO usuario (cedula, nombre, fecha_nac, nacionalidad, numerocuenta) VALUES (?, ?, ?, ?, ?)";
         
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -26,6 +26,7 @@ public class UserDAO {
             stmt.setString(2, user.getNombre());
             stmt.setDate(3, new java.sql.Date(user.getFecha_nac().getTime()));
             stmt.setString(4, user.getNacionalidad());
+            stmt.setString(5, num);
             
             stmt.executeUpdate();
             
