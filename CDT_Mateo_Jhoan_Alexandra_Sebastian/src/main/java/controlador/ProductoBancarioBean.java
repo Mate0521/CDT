@@ -4,9 +4,17 @@
  */
 package controlador;
 
-import jakarta.inject.Named;
+
+import conexion.Conexion;
+import dao.CDTDAO;
+import dao.UserDAO;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import modelo.CDT;
 import modelo.User;
 
@@ -14,12 +22,16 @@ import modelo.User;
  *
  * @author mateo
  */
-@Named(value = "productoBancarioBean")
+@Named("productoBancarioBean")
 @SessionScoped
 public class ProductoBancarioBean implements Serializable{
     
-    CDT cdt=new CDT();
-    User usuario=new User();
+    private CDT cdt=new CDT();
+    private User usuario=new User();
+    private final CDTDAO cdtDAO = new CDTDAO();
+    private final UserDAO userDAO= new UserDAO();
+    private String cc;
+    private String num;
 
     /**
      * Creates a new instance of ProductoBancarioBean
@@ -30,10 +42,75 @@ public class ProductoBancarioBean implements Serializable{
     public String openFormulario(){
         return "formUsuarios?faces-redirect=true";
     }
-    public String ver(){
-        return "Mostrar?faces-redirect=true";
+    public String ver() {
+        extraerObCDT(); 
+        if (this.cdt != null) {
+            extraerObUser(); 
+            if(userDAO.autenticacion(this.num, this.cc)){
+                return "datosUser.xhtml"; 
+            }
+            return null;
+        } else {
+            System.out.println("No se encontró ningún CDT con ese número de cuenta.");
+            return null; // o regresa a la misma página mostrando mensaje de error
+        }
+        
     }
     
+    public String guardar() {
+
+        usuario.setCedula(usuario.getCedula().trim());
+        usuario.setNombre(usuario.getNombre().trim());
+        usuario.setNacionalidad(usuario.getNacionalidad().trim());
+        cdt.setNumeroCuenta(usuario.getCedula().trim() + "00001");
+        
+        try {
+            
+            cdtDAO.guardarCDT(cdt);
+            // Luego asociar la cuenta al usuario y guardar el usuario
+            userDAO.guardarUser(usuario,cdt.getNumeroCuenta());
+            this.usuario = new User();
+            this.cdt = new CDT();
+        } catch (Exception e) {
+            System.out.println("Error al guardar:" + e.getMessage());
+            
+        }
+
+        return null;
+    }
+    
+    public void extraerObCDT(){
+        try (Connection conn = Conexion.getConnection()) {
+            System.out.println("conexion exitosa");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        CDT cdtEncontrado = cdtDAO.obtenerCDTPorNumeroCuenta(this.num);
+        if (cdtEncontrado != null) {
+            this.cdt = cdtEncontrado;
+        } else {
+            System.out.println("No se encontró ningún CDT con ese número de cuenta.");
+        }
+    }
+    public void extraerObUser(){
+        try (Connection conn = Conexion.getConnection()) {
+            System.out.println("conexion exitosa");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Asegúrate de que tienes la cédula del usuario disponible
+        User userEncontrado = userDAO.obtenerUserPorCedula(this.cc); // Asegúrate de que cdt tenga el método getCedula()
+        if (userEncontrado != null) {
+            this.usuario = userEncontrado; // Almacena el usuario en una variable de instancia
+        } else {
+            System.out.println("No se encontró ningún usuario con esa cédula.");
+        }
+        
+    }
+    
+    
+
     //resto de formatos 
 
     public CDT getCdt() {
@@ -51,4 +128,22 @@ public class ProductoBancarioBean implements Serializable{
     public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
+        this.cc = cc;
+    }
+    
+    
 }

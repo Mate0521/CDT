@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2025 a las 18:00:27
+-- Tiempo de generación: 04-07-2025 a las 04:58:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cdt` (
-  `numerocuenta` int(11) NOT NULL,
+  `numerocuenta` bigint(20) NOT NULL,
   `inversion` decimal(20,2) NOT NULL,
   `interes` double NOT NULL,
   `plazo` int(11) NOT NULL
@@ -58,7 +58,10 @@ INSERT INTO `cdt` (`numerocuenta`, `inversion`, `interes`, `plazo`) VALUES
 (1017, 990000.00, 6, 24),
 (1018, 100000.00, 4.3, 6),
 (1019, 850000.00, 6.1, 36),
-(1020, 500000.00, 5.4, 12);
+(1020, 500000.00, 5.4, 12),
+(10001, 1000000.00, 12, 450),
+(500001, 100000000.00, 12.8, 480),
+(52200001, 100000000.00, 12.8, 490);
 
 -- --------------------------------------------------------
 
@@ -71,7 +74,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(20) NOT NULL,
   `nacionalidad` varchar(20) NOT NULL,
   `fecha_nac` date NOT NULL,
-  `numerocuenta` int(11) NOT NULL
+  `numerocuenta` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -79,6 +82,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cedula`, `nombre`, `nacionalidad`, `fecha_nac`, `numerocuenta`) VALUES
+(1, 'p', 'albano', '1987-11-30', 10001),
+(5, 'pepe', 'ruso', '1999-06-05', 500001),
+(522, 'pepe', 'ruso', '1999-06-05', 52200001),
 (1010101010, 'Paula', 'Colombiana', '1987-12-01', 1010),
 (1111111111, 'Juan', 'Colombiana', '1990-05-12', 1001),
 (1212121212, 'Jorge', 'Colombiana', '1990-04-08', 1011),
